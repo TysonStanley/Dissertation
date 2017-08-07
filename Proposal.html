@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MARGINAL MEDIATION</title>
+    <meta charset="utf-8">
+    <meta name="author" content="Tyson S. Barrett" />
+    <script src="libs/htmlwidgets/htmlwidgets.js"></script>
+    <script src="libs/jquery/jquery.min.js"></script>
+    <script src="libs/datatables-binding/datatables.js"></script>
+    <link href="libs/dt-core/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" href="pres.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# MARGINAL MEDIATION
+## A NEW FRAMEWORK FOR INTERPRETABLE MEDIATED EFFECTS
+### Tyson S. Barrett
+
+---
+
+
+
+class: inverse
+
+# Outline
+
+--
+
+## 1. Reproducibility and Effect Sizes
+--
+
+## 2. Mediation Analysis Lacks Effect Sizes
+--
+
+## 3. Average Marginal Effects Can Help
+--
+
+## 4. Marginal Mediation (What and Why)
+--
+
+## 5. Proposed Methods
+
+---
+# Reproducibility
+
+Quick Definitions
+
+1. **Methods Reproducibility**: replicate results with *same methods and data*
+
+--
+
+1. **Results Reproducibility**: replicate results with same methods and *independent data*
+
+--
+
+1. **Inference Reproducibility**: replicate *inference* with same methods and same or independent data
+
+--
+
+Here, we will be mainly discussing results reproducibility.
+
+---
+# Reproducibility
+
+.pull-left[
+Pychological Science (and Science in general) is undergoing a "reproducibility crisis"
+
+Many recommendations to improve:
+
+- No reliance on Null Hypothesis Significance Testing (NHST;  Cumming, 2014)
+- In its place, use *Effect Sizes* and *Confidence Intervals*
+
+.footnote[
+Cumming, G. (2014). The New Statistics: Why and How. *Psych. Science*.
+]
+]
+
+
+.pull-right[
+&lt;img src="Proposal_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+---
+# Reproducibility and Mediation Analysis
+
+How does this "crisis" affect mediation analysis?
+
+- Cumming (2014), and now the APA in general, recommend using **effect sizes and confidence intervals**
+
+--
+
+  - Mediation analysis lacks intuitive and interpretable effect size measures in many situations
+    
+  - Needs remedy to make mediation useful across the data situations faced by researchers (e.g., nominal, ordinal, count, and binary variables)
+
+---
+# Mediation Analysis
+
+.pull-left[
+A series of regressions
+
+Simplest situation shown below and at right:
+
+$$
+Y = c_0 + b_1 M + c'_1 X + e_1
+$$
+
+$$
+M = a_0 + a_1 X + e_2
+$$
+
+Used extensively in prevention science research
+
+]
+
+.pull-right[
+&lt;img src="Proposal_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+]
+
+--
+
+Presents information regarding the pathway: from X to M to Y
+
+<div id="htmlwidget-294ed802bae5c62f3dd7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-294ed802bae5c62f3dd7">{"x":{"filter":"none","data":[["Indirect Effect","Direct Effect","Total Effect"],["a * b","c'","a * b + c'"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>effect<\/th>\n      <th>definition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+---
+# But...
+
+Mediation analysis does not have the following when the mediator and/or outcome is categorical:
+
+- intuitive interpretation
+- defined effect sizes (indirect or total)
+- meaningful confidence intervals
+
+--
+
+### Why?
+
+Suppose: X is continuous, M is binary, and Y is continuous.
+
+<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["X - M","M - Y","X - Y"],["logistic","OLS","OLS"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>model<\/th>\n      <th>type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+How do we combine logistic and OLS coefficients?
+
+---
+# Current Approaches
+
+<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+--
+
+Still missing: *intuitive, interpretable effect size measures with meaningful confidence intervals*
+
+---
+# Average Marginal Effects
+
+The *average* of the marginal effect (it is a post-estimation approach) (Bartus, 2005):
+
+--
+
+#### Definition: Continuous Variable
+$$
+AME_k = \beta_k \frac{1}{n} \sum_i^n f(\beta x_i)
+$$
+where `\(f\)` is the derivative of the estimate with respect to `\(x_i\)`, the `\(\beta x_i\)` refers to the linear combination of the predictors, and `\(AME_k\)` is the average marginal effect for the `\(kth\)` variable. 
+
+--
+
+#### Definition: Dummy Coded Variable
+$$
+AME_{k} = \frac{1}{n} \sum_i^n [ F(\beta x_i | x_i = 1) - F(\beta x_i | x_i = 0) ]
+$$
+where `\(F(\beta x_i | x_i = 1)\)` is the predicted value of the `\(ith\)` observation when the dummy variable equals one and `\(F(\beta x_i | x_i = 0)\)` is the predicted value when the dummy value equals zero. 
+
+---
+# Average Marginal Effects
+
+Both the continuous and dummy variable AME are the averages (as the name implies)---averages of the effect of a one unit increase of the `\(x_i\)` variable. 
+
+In linear models, it is the estimate coefficient (the derivative is equal to the coefficient)
+
+In Generalized Linear Models (GLMs) such as logistic regression, it is more complicated.
+
+- The derivative (marginal effect) generally depends on the values of the covariates
+
+.center[EXAMPLES...]
+
+
+---
+# Example
+
+.pull-left[
+
+#### Linear Model
+
+$$
+Y = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+The marginal effect of, say, `\(X_1\)` is:
+$$
+\frac{\delta Y}{\delta X_1} = \beta_1
+$$
+]
+
+--
+
+.pull-right[
+
+#### Logistic Regression
+
+$$
+logit(Y) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+$$
+log(\frac{Prob(Y = 1)}{1 - Prob(Y = 1)}) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+$$
+\frac{Prob(Y = 1)}{1 - Prob(Y = 1)} = e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}
+$$
+
+$$
+Prob(Y = 1) = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}
+$$
+
+The marginal effect of, say, `\(X_1\)` is:
+$$
+\frac{\delta Y}{\delta X_1} = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{(1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i})^2}
+$$
+]
+
+---
+# Average Marginal Effects
+
+The derivative (marginal effect) generally depends on the values of the covariates
+
+--
+- What values should we use to get the marginal effect then?
+- AME uses the actual values and then averages across all individuals
+
+--
+
+### Some Benefits:
+
+1. intuitive -- they are in the original metric of the dependent variable
+1. interpretable -- they refer to the change in the dependent variable for a one unit change in the independent
+1. meaningful confidence intervals -- using bootstrapping (used here) or the delta method
+
+--
+
+.center[Why not use Average Marginal Effects with mediation analysis?]
+
+---
+class: inverse, center, middle
+# Marginal Mediation 
+
+---
+# The What
+
+It is two step approach
+
+1. Estimate the mediation model (via OLS or GLM)
+1. Compute the average marginal effects of each path
+
+--
+
+Since each path is the additive change, the combination of paths is much more straightforward
+
+--
+
+#### Example with Binary Mediator and Count Outcome
+
+![](fig_combining.jpg)
+
+---
+# Interpretation
+
+Since this method can handle all sorts of combinations of variable types, here are some interpretation guidelines.
+
+### Principle 1: The individual paths are interpreted based on the corresponding endogenous variable's original metric.
+
+--
+### Principle 2: The indirect effect, as a combination of the a and b paths, are interpreted based on the outcome's original metric.
+
+--
+### Principle 3: Both the direct and total effects are interpreted based on the outcome's original metric.
+
+---
+# Assumptions
+
+The same assumptions as linear models or generalized linear models hold.
+
+1. Correct distribution (normal in linear models)
+1. Proper variance (homoskedastic in linear models)
+1. Linear in parameters
+1. Random sample
+1. No measurement error
+1. No omitted influences
+
+--
+
+Only additional assumption with AME included:
+
+1. Marginal effect can be described *additively* (after accounting for all the covariates)
+
+---
+class: inverse, center, middle
+# Proposed Methods
+
+---
+## 1. Development
+
+- to develop the approach and the software
+
+--
+
+## 2. Monte Carlo Simulation Study
+
+- to understand the finite sampling properties
+
+--
+
+## 3. Application Studies
+
+- to apply Marginal Mediation to prevention data
+
+---
+# Development
+
+Marginal Mediation will be established on linear regression---either ordinary least squares for continuous outcomes/mediators or maximum likelihood for categorical outcomes/mediators and will include the post-estimation step.
+
+Various considerations for each type of mediator/outcome variable (multinomial, count, ordinal, dichotomous): 
+
+1. An appropriate manner in which to integrate moderation (interaction effects) into the framework is important. 
+1. It has been noted that in non-linear models the `\(a * b + c'\)` generally does not equal the `\(c\)` path as it does in linear models (MacKinnon, Chapter 11). It is expected that these will equal within the Marginal Mediation framework. 
+
+
+---
+# Software Development
+
+- R statistical environment -- distributed through "CRAN"
+- Consist of a number of functions to fit the model and assess the model’s fit while efficiently producing the paths and effects in proper units
+- The package will apply the best practices for both computational speed and user readability (Wickham, 2015), 
+   - Allows other researchers to extend the package more easily 
+   - Includes built-in tests performed on Linux, Mac, and Windows platforms
+
+![](fig_marginal_mediation.jpg)
+
+
+---
+# Monte Carlo Simulation
+
+#### The "a" Path Population Model 
+- where the `\(Prob(M = 1)\)` is a latent continuous variable with a linear or logistic relationship with the predictors
+- the `\(e_i\)` is normally distributed with `\(M = 0\)` and `\(SD = 1\)`.
+$$
+Prob(M = 1)_i = a_0 + a_1 x_c + a_2 x_d + e_i
+$$
+The observed variable, `\(M_i\)`, is defined as follows: `\(M_i = 0\)` if `\(Prob(M = 1) &lt; .5\)` and `\(M_i = 1\)` otherwise.
+
+--
+
+#### The "b" and "c'" Path Population Model
+$$
+Y_i = b_0 + b_1 M_i + c'_1 x_c + c'_2 x_d + e_i
+$$
+
+---
+# Monte Carlo Simulation
+
+<div id="htmlwidget-b16e2f2d245dc177e6d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b16e2f2d245dc177e6d8">{"x":{"filter":"none","data":[["Sample Size ","Effect size of a path - (probability units)","Effect size of b path - standardized ","Effect size of c' path - standardized ","Proportion of Positive Response (Binary Mediators)","Number of Mediators in Model ","Distribution of the Probability","Bootstrap Size","","Total Conditions "],["200, 500 ",".05, .10, .20, .50",".10, .30, .50 ","0, .30 ",".05, .10, .50","1, 3","Logistic, Linear","500, 1000","","1,152"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Independent Variables<\/th>\n      <th>Conditions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+--
+
+Each condition will have 500 replications.
+
+---
+# Application Studies
+
+![](fig_theorymed.jpg)
+
+---
+class: inverse, center, middle
+
+# Thank you.
+# 🙂
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {window.dispatchEvent(new Event('resize'));});</script>
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+  }
+});
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
