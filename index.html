@@ -47,21 +47,24 @@ class: inverse
 ---
 # Reproducibility
 
-Quick Definitions
+#### Three Types:
 
-1. **Methods Reproducibility**: replicate results with *same methods and data*
-
---
-
-1. **Results Reproducibility**: replicate results with same methods and *independent data*
+1. **Methods**: replicate results with *same methods and data*
 
 --
 
-1. **Inference Reproducibility**: replicate *inference* with same methods and same or independent data
+1. **Results**: replicate results with same methods and *independent data*
 
 --
 
-Here, we will be mainly discussing results reproducibility.
+1. **Inference**: replicate *inference* with same methods and same or independent data
+
+--
+
+.center[
+&lt;/br&gt;&lt;/br&gt;
+Here, we will be mainly discussing *results* reproducibility.
+]
 
 ---
 # Reproducibility
@@ -69,7 +72,9 @@ Here, we will be mainly discussing results reproducibility.
 .pull-left[
 Pychological Science (and Science in general) is undergoing a "reproducibility crisis"
 
-Many recommendations to improve:
+Many recommendations to improve.
+
+The most adopted suggestion by the APA:
 
 - No reliance on Null Hypothesis Significance Testing (NHST;  Cumming, 2014)
 - In its place, use *Effect Sizes* and *Confidence Intervals*
@@ -93,17 +98,20 @@ How does this "crisis" affect mediation analysis?
 
 --
 
-  - Mediation analysis lacks intuitive and interpretable effect size measures in many situations
-    
-  - Needs remedy to make mediation useful across the data situations faced by researchers (e.g., nominal, ordinal, count, and binary variables)
+  - *Mediation Analysis*:
+     - Lacks intuitive and interpretable effect sizes in many situations (e.g., when mediator/outcome is nominal, ordinal, count, or binary)
+--
+     - Limits its utility and raises questions about best practices
+
+![](fig_mediation_questions.jpg)
 
 ---
 # Mediation Analysis
 
 .pull-left[
-A series of regressions
+A series of regressions (path analysis)
 
-Simplest situation shown below and at right:
+Simplest situation shown below (equations) and at right (figure):
 
 $$
 Y = c_0 + b_1 M + c'_1 X + e_1
@@ -123,10 +131,8 @@ Used extensively in prevention science research
 
 --
 
-Presents information regarding the pathway: from X to M to Y
-
 <div id="htmlwidget-294ed802bae5c62f3dd7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-294ed802bae5c62f3dd7">{"x":{"filter":"none","data":[["Indirect Effect","Direct Effect","Total Effect"],["a * b","c'","a * b + c'"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>effect<\/th>\n      <th>definition<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-294ed802bae5c62f3dd7">{"x":{"filter":"none","data":[["Indirect Effect","Direct Effect","Total Effect"],["a * b","c'","a * b + c'"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Effects<\/th>\n      <th>Definitions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 # But...
@@ -139,20 +145,17 @@ Mediation analysis does not have the following when the mediator and/or outcome 
 
 --
 
-### Why?
+**Why?**
 
-Suppose: X is continuous, M is binary, and Y is continuous.
-
-<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["X - M","M - Y","X - Y"],["logistic","OLS","OLS"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>model<\/th>\n      <th>type<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+![](fig_binarymediator.jpg)
 
 How do we combine logistic and OLS coefficients?
 
 ---
 # Current Approaches
 
-<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 --
 
@@ -161,7 +164,7 @@ Still missing: *intuitive, interpretable effect size measures with meaningful co
 ---
 # Average Marginal Effects
 
-The *average* of the marginal effect (it is a post-estimation approach) (Bartus, 2005):
+The *average* of the marginal effects (it is a post-estimation approach; Bartus, 2005):
 
 --
 
@@ -184,17 +187,23 @@ where `\(F(\beta x_i | x_i = 1)\)` is the predicted value of the `\(ith\)` obser
 
 Both the continuous and dummy variable AME are the averages (as the name implies)---averages of the effect of a one unit increase of the `\(x_i\)` variable. 
 
-In linear models, it is the estimate coefficient (the derivative is equal to the coefficient)
+- In linear models, it is the estimate coefficient (the derivative is equal to the coefficient)
 
-In Generalized Linear Models (GLMs) such as logistic regression, it is more complicated.
+--
 
-- The derivative (marginal effect) generally depends on the values of the covariates
+- In Generalized Linear Models (GLMs) such as logistic regression, it is more complicated.
 
-.center[EXAMPLES...]
+    - The derivative (marginal effect) generally depends on the values of the covariates
+
+--
+
+&lt;/br&gt;
+
+.center[**EXAMPLES...**]
 
 
 ---
-# Example
+# Examples
 
 .pull-left[
 
@@ -250,13 +259,16 @@ The derivative (marginal effect) generally depends on the values of the covariat
 
 ### Some Benefits:
 
-1. intuitive -- they are in the original metric of the dependent variable
-1. interpretable -- they refer to the change in the dependent variable for a one unit change in the independent
-1. meaningful confidence intervals -- using bootstrapping (used here) or the delta method
+1. *intuitive* -- they are in the original metric of the dependent variable
+1. *interpretable* -- they refer to the change in the dependent variable for a one unit change in the independent
+1. *meaningful confidence intervals* -- using bootstrapping (used here) or the delta method
 
 --
 
-.center[Why not use Average Marginal Effects with mediation analysis?]
+.center[
+*These qualities are lacking in mediation analysis.* &lt;/br&gt;&lt;/br&gt;
+So... (Punchline) Why not use Average Marginal Effects with mediation analysis?
+]
 
 ---
 class: inverse, center, middle
@@ -276,6 +288,7 @@ Since each path is the additive change, the combination of paths is much more st
 
 --
 
+&lt;/br&gt;
 #### Example with Binary Mediator and Count Outcome
 
 ![](fig_combining.jpg)
@@ -307,9 +320,11 @@ The same assumptions as linear models or generalized linear models hold.
 
 --
 
-Only additional assumption with AME included:
+&lt;/br&gt;
 
-1. Marginal effect can be described *additively* (after accounting for all the covariates)
+.center[&lt;b&gt;Only additional assumption with AME:&lt;/b&gt;]
+
+.center[Marginal effect can be described *additively* (after accounting for all the covariates)]
 
 ---
 class: inverse, center, middle
@@ -324,35 +339,54 @@ class: inverse, center, middle
 
 ## 2. Monte Carlo Simulation Study
 
-- to understand the finite sampling properties
+- to understand the finite sampling properties, develop guidelines
 
 --
 
-## 3. Application Studies
+## 3. Application Study
 
 - to apply Marginal Mediation to prevention data
 
 ---
-# Development
+# Method Development
 
-Marginal Mediation will be established on linear regression---either ordinary least squares for continuous outcomes/mediators or maximum likelihood for categorical outcomes/mediators and will include the post-estimation step.
+#### Mediation as built on OLS and GLM
 
-Various considerations for each type of mediator/outcome variable (multinomial, count, ordinal, dichotomous): 
+---
+# Method Development
 
-1. An appropriate manner in which to integrate moderation (interaction effects) into the framework is important. 
-1. It has been noted that in non-linear models the `\(a * b + c'\)` generally does not equal the `\(c\)` path as it does in linear models (MacKinnon, Chapter 11). It is expected that these will equal within the Marginal Mediation framework. 
+#### Mediation as built on OLS and GLM **+ Average Marginal Effects**
+
+--
+
+&lt;/br&gt;
+Two considerations for each type of mediator/outcome variable (multinomial, count, ordinal, dichotomous): 
+
+1. Need a way to integrate moderation (interaction effects) into the framework. 
+    - Interactions with marginal effects are more complex.
+1. Generally, 
+$$
+a * b + c' \neq c
+$$
+in non-linear models (it does equal in linear models; MacKinnon, Chapter 11). It is expected that these will equal (approx.) within the Marginal Mediation framework, but needs to be assessed.
 
 
 ---
 # Software Development
 
-- R statistical environment -- distributed through "CRAN"
-- Consist of a number of functions to fit the model and assess the model’s fit while efficiently producing the paths and effects in proper units
-- The package will apply the best practices for both computational speed and user readability (Wickham, 2015), 
-   - Allows other researchers to extend the package more easily 
-   - Includes built-in tests performed on Linux, Mac, and Windows platforms
+**R statistical environment** -- distributed worldwide through "CRAN"
 
 ![](fig_marginal_mediation.jpg)
+
+--
+
+.left-column[
+## Other Notes
+]
+.right-column[
+Functions to assess model's fit and visualize model, will apply the best practices for both speed and user readability (Wickham, 2015), and will include built-in tests for Linux, Mac, and Windows platforms
+]
+
 
 
 ---
@@ -368,6 +402,7 @@ The observed variable, `\(M_i\)`, is defined as follows: `\(M_i = 0\)` if `\(Pro
 
 --
 
+&lt;/br&gt;
 #### The "b" and "c'" Path Population Model
 $$
 Y_i = b_0 + b_1 M_i + c'_1 x_c + c'_2 x_d + e_i
@@ -376,12 +411,41 @@ $$
 ---
 # Monte Carlo Simulation
 
-<div id="htmlwidget-b16e2f2d245dc177e6d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b16e2f2d245dc177e6d8">{"x":{"filter":"none","data":[["Sample Size ","Effect size of a path - (probability units)","Effect size of b path - standardized ","Effect size of c' path - standardized ","Proportion of Positive Response (Binary Mediators)","Number of Mediators in Model ","Distribution of the Probability","Bootstrap Size","","Total Conditions "],["200, 500 ",".05, .10, .20, .50",".10, .30, .50 ","0, .30 ",".05, .10, .50","1, 3","Logistic, Linear","500, 1000","","1,152"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Independent Variables<\/th>\n      <th>Conditions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Sample Size ","Effect size of a path - (probability units)","Effect size of b path - standardized ","Effect size of c' path - standardized ","Proportion of Positive Response (Binary Mediators)","Number of Mediators in Model ","Distribution of the Probability","Bootstrap Size","","Total Conditions "],["200, 500 ",".05, .10, .20, .50",".10, .30, .50 ","0, .30 ",".05, .10, .50","1, 3","Logistic, Linear","500, 1000","","1,152"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Independent Variables<\/th>\n      <th>Conditions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 --
 
 Each condition will have 500 replications.
+
+---
+# Application Studies
+
+The National Longitudinal Study of Adolescent Health (“Add Health”; Harris, Halpern, Haberstick, &amp; Smolen, 2013)
+
+Longitudinal data on adolescents (n = 14,960 at wave I)
+
+.left-column[
+# Wave I
+
+&lt;/br&gt;
+&lt;/br&gt;
+
+# Wave II
+]
+
+--
+
+.right-column[
+**Predictors**: Parent report of the chronic conditions ("For each of the following health conditions, please tell me whether [your child] has [asthma, migraines]." 
+
+**Mediators**: Depression (19 items) and Anxiety (7 items)
+
+&lt;/br&gt;
+
+**Outcomes**: Delinquency (15 items) and substance use ("During the past 30 days, how many times have you used marijuana?" and "During the past two weeks, how many times did you have 5+ drinks on a single occasion?") 
+]
+
 
 ---
 # Application Studies
@@ -392,7 +456,10 @@ Each condition will have 500 replications.
 class: inverse, center, middle
 
 # Thank you.
-# 🙂
+
+.footnote[
+* All references cited herein can be found in the proposal manuscript.
+]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
 <script>var slideshow = remark.create({
