@@ -10,6 +10,7 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+      ratio: '16:9'
 ---
 
 ```{r setup, include=FALSE}
@@ -38,23 +39,22 @@ class: inverse
 ---
 # Reproducibility
 
+.large[
 #### Three Types:
 
 1. **Methods**: replicate results with *same methods and data*
 
---
-
 1. **Results**: replicate results with same methods and *independent data*
 
---
-
 1. **Inference**: replicate *inference* with same methods and same or independent data
+]
 
 --
+
 
 .center[
 </br></br>
-Here, we will be mainly discussing *results* reproducibility.
+.large[Here, we will be mainly discussing *results* reproducibility.]
 ]
 
 ---
@@ -104,16 +104,15 @@ ggplot(eci, aes(factor(x, labels = paste("Variable", 1:5)), y)) +
 ---
 # Reproducibility and Mediation Analysis
 
-How does this "crisis" affect mediation analysis?
-
-- Cumming (2014), and now the APA in general, recommend using **effect sizes and confidence intervals**
+.mlarge[The APA, in general, recommends using **effect sizes and confidence intervals**]
 
 --
 
-  - *Mediation Analysis*:
-     - Lacks intuitive and interpretable effect sizes in many situations (e.g., when mediator/outcome is nominal, ordinal, count, or binary)
+*Mediation Analysis*:
+- Lacks intuitive and interpretable effect sizes in many situations (e.g., when mediator/outcome is nominal, ordinal, count, or binary)
 --
-     - Limits its utility and raises questions about best practices
+
+- *Limits its utility and raises questions about best practices*
 
 ![](fig_mediation_questions.jpg)
 
@@ -135,10 +134,12 @@ $$
 
 Used extensively in prevention science research
 
+Info on *individual paths* and *entire process*
+
 ]
 
 .pull-right[
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=5, fig.width=7}
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=4, fig.width=6}
 library("lavaan")
 
 # Example 5.8 from mplus user guide:
@@ -187,7 +188,7 @@ data.frame(
 ---
 # But...
 
-Mediation analysis does not have the following when the mediator and/or outcome is categorical:
+When the mediator and/or outcome is categorical/non-normal, mediation analysis does not have:
 
 - intuitive interpretation
 - defined effect sizes (indirect or total)
@@ -199,6 +200,7 @@ Mediation analysis does not have the following when the mediator and/or outcome 
 
 ![](fig_binarymediator.jpg)
 
+???
 How do we combine logistic and OLS coefficients?
 
 ---
@@ -221,12 +223,45 @@ data.frame(
            "Purposeful mis-specification, poor model fit")
 ) %>%
   DT::datatable(options = list(dom = "t"),
-                rownames = FALSE)
+                rownames = FALSE) %>%
+  DT::formatStyle(c("Approach"),
+                  target = "row",
+                  color = DT::styleEqual(c("Simple", "SEM", "Standardize", "Ignore"), 
+                                         c("black", "black", "white", "white")))
+```
+
+---
+count: false
+
+# Current Approaches
+
+```{r, echo=FALSE}
+data.frame(
+  Approach = c("Simple", "SEM", "Standardize", "Ignore"),
+  What = c("Interpret each path separately",
+           "Use SEM's approach (probit threshold function)",
+           "Standardize the coefficients",
+           "Pretend all variables are continuous"),
+  Pros = c("Easy", 
+           "Powerful, Well-designed, Easy to Implement", 
+           "Provides significance test of indirect effect",
+           "Easy"),
+  Cons = c("Ignores some information",
+           "Only works with ordinal variables",
+           "Assumptions (distributions), difficult to interpret beyond p-value",
+           "Purposeful mis-specification, poor model fit")
+) %>%
+  DT::datatable(options = list(dom = "t"),
+                rownames = FALSE) %>%
+  DT::formatStyle(c("Approach"),
+                  target = "row",
+                  color = DT::styleEqual(c("Simple", "SEM", "Standardize", "Ignore"), 
+                                         c("black", "black", "black", "black")))
 ```
 
 --
 
-Still missing: *intuitive, interpretable effect size measures with meaningful confidence intervals*
+#### Still missing: *intuitive, interpretable effect size measures with meaningful confidence intervals*
 
 ---
 # Average Marginal Effects
@@ -250,27 +285,7 @@ $$
 where $F(\beta x_i | x_i = 1)$ is the predicted value of the $ith$ observation when the dummy variable equals one and $F(\beta x_i | x_i = 0)$ is the predicted value when the dummy value equals zero. 
 
 ---
-# Average Marginal Effects
-
-Both the continuous and dummy variable AME are the averages (as the name implies)---averages of the effect of a one unit increase of the $x_i$ variable. 
-
-- In linear models, it is the estimate coefficient (the derivative is equal to the coefficient)
-
---
-
-- In Generalized Linear Models (GLMs) such as logistic regression, it is more complicated.
-
-    - The derivative (marginal effect) generally depends on the values of the covariates
-
---
-
-</br>
-
-.center[**EXAMPLES...**]
-
-
----
-# Examples
+# Why the big fuss?
 
 .pull-left[
 
@@ -313,14 +328,19 @@ $$
 $$
 ]
 
+???
+The derivative (marginal effect) generally depends on the values of the covariates
+
 ---
 # Average Marginal Effects
 
 The derivative (marginal effect) generally depends on the values of the covariates
 
 --
-- What values should we use to get the marginal effect then?
-- AME uses the actual values and then averages across all individuals
+
+*What values should we use to get the marginal effect then?*
+
+AME uses **the actual values** and then averages across all individuals
 
 --
 
@@ -334,7 +354,7 @@ The derivative (marginal effect) generally depends on the values of the covariat
 
 .center[
 *These qualities are lacking in mediation analysis.* </br></br>
-So... (Punchline) Why not use Average Marginal Effects with mediation analysis?
+So... (Punchline) </br>**Let's use Average Marginal Effects with mediation analysis**
 ]
 
 ---
@@ -355,7 +375,6 @@ Since each path is the additive change, the combination of paths is much more st
 
 --
 
-</br>
 #### Example with Binary Mediator and Count Outcome
 
 ![](fig_combining.jpg)
@@ -417,12 +436,14 @@ class: inverse, center, middle
 ---
 # Method Development
 
-#### Mediation as built on OLS and GLM
+.large[#### Mediation as built on OLS and GLM]
 
 ---
+count: false
+
 # Method Development
 
-#### Mediation as built on OLS and GLM **+ Average Marginal Effects**
+.large[#### Mediation as built on OLS and GLM **+ Average Marginal Effects**]
 
 --
 
@@ -437,6 +458,8 @@ a * b + c' \neq c
 $$
 in non-linear models (it does equal in linear models; MacKinnon, Chapter 11). It is expected that these will equal (approx.) within the Marginal Mediation framework, but needs to be assessed.
 
+???
+Total effect does not equal total effect! This is a problem.
 
 ---
 # Software Development
@@ -445,10 +468,14 @@ in non-linear models (it does equal in linear models; MacKinnon, Chapter 11). It
 
 ![](fig_marginal_mediation.jpg)
 
---
+---
+count: false
+# Software Development
+
+**R statistical environment** -- distributed worldwide through "CRAN"
 
 .left-column[
-## Other Notes
+## Notes
 ]
 .right-column[
 Functions to assess model's fit and visualize model, will apply the best practices for both speed and user readability (Wickham, 2015), and will include built-in tests for Linux, Mac, and Windows platforms
@@ -514,15 +541,16 @@ Longitudinal data on adolescents (n = 14,960 at wave I)
 **Mediators**: Depression (19 items) and Anxiety (7 items)
 
 </br>
+</br>
 
 **Outcomes**: Delinquency (15 items) and substance use ("During the past 30 days, how many times have you used marijuana?" and "During the past two weeks, how many times did you have 5+ drinks on a single occasion?") 
 ]
 
 
 ---
-# Application Studies
-
-![](fig_theorymed.jpg)
+background-image: url(fig_theorymed.jpg)
+background-size: contain
+background-repeat: no-repeat
 
 ---
 class: inverse, center, middle
