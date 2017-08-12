@@ -69,24 +69,21 @@ class: inverse
 # Reproducibility
 
 .pull-left[
-Pychological Science (and Science in general) is undergoing a "reproducibility crisis"
+**"Reproducibility Crisis"**
 
 Many recommendations to improve.
 
 The most adopted suggestion by the APA:
 
-- No reliance on Null Hypothesis Significance Testing (NHST;  Cumming, 2014)
+- No reliance on Null Hypothesis Significance Testing (Cumming, 2014)
 - In its place, use *Effect Sizes* and *Confidence Intervals*
 
-.footnote[
-Cumming, G. (2014). The New Statistics: Why and How. *Psych. Science*.
 ]
-]
-
 
 .pull-right[
 &lt;img src="Proposal_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
 ]
+
 
 ---
 # Reproducibility and Mediation Analysis
@@ -152,50 +149,14 @@ When the mediator and/or outcome is categorical/non-normal, mediation analysis d
 ???
 How do we combine logistic and OLS coefficients?
 
----
-# Current Approaches
+Adjusting to Odds Ratios doesn't help (it creates a multiplicitive effect instead of additive)
 
-<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'white' : value == 'Ignore' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
-
----
-count: false
-
-# Current Approaches
-
-<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'black' : value == 'Ignore' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
-
---
-
-#### Still missing: *intuitive, interpretable effect size measures with meaningful confidence intervals*
-
----
-# Average Marginal Effects
-
-The *average* of the marginal effects (it is a post-estimation approach; Bartus, 2005):
-
---
-
-#### Definition: Continuous Variable
-$$
-AME_k = \beta_k \frac{1}{n} \sum_i^n f(\beta x_i)
-$$
-where `\(f\)` is the derivative of the estimate with respect to `\(x_i\)`, the `\(\beta x_i\)` refers to the linear combination of the predictors, and `\(AME_k\)` is the average marginal effect for the `\(kth\)` variable. 
-
---
-
-#### Definition: Dummy Coded Variable
-$$
-AME_{k} = \frac{1}{n} \sum_i^n [ F(\beta x_i | x_i = 1) - F(\beta x_i | x_i = 0) ]
-$$
-where `\(F(\beta x_i | x_i = 1)\)` is the predicted value of the `\(ith\)` observation when the dummy variable equals one and `\(F(\beta x_i | x_i = 0)\)` is the predicted value when the dummy value equals zero. 
+Ultimately, to combine the paths, we need to be able to say the change for a one unit change in the predictor.
 
 ---
 # Why the big fuss?
 
 .pull-left[
-
 #### Linear Model
 
 $$
@@ -238,30 +199,81 @@ $$
 ???
 The derivative (marginal effect) generally depends on the values of the covariates
 
+To simply combine effects, like in linear regression, we need the estimate to be **additive**
+
+
+---
+# Current Approaches
+
+<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'white' : value == 'Ignore' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+
+---
+count: false
+
+# Current Approaches
+
+<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'black' : value == 'Ignore' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+
+--
+
+&lt;/br&gt;
+.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? &lt;/br&gt; No.]]
+
 ---
 # Average Marginal Effects
 
-The derivative (marginal effect) generally depends on the values of the covariates
+The *average* of the marginal effects -- it is a post-estimation approach (Bartus, 2005):
 
 --
+
+.pull-left[
+#### Definition: Continuous Variable
+$$
+AME_k = \beta_k \frac{1}{n} \sum_i^n f(\beta x_i)
+$$
+where `\(f\)` is the derivative of the estimate with respect to `\(x_i\)`, the `\(\beta x_i\)` is the linear combination of the predictors, and `\(AME_k\)` is the average marginal effect for the `\(kth\)` variable. 
+]
+
+--
+
+.pull-right[
+#### Definition: Dummy Coded Variable
+$$
+AME_{k} = \frac{1}{n} \sum_i^n [ F(\beta x_i | x_i = 1) - F(\beta x_i | x_i = 0) ]
+$$
+where `\(F(\beta x_i | x_i = 1)\)` is the predicted value of the `\(ith\)` observation when the dummy variable equals one and `\(F(\beta x_i | x_i = 0)\)` is the predicted value when the dummy value equals zero. 
+]
+
+--
+
+&lt;/br&gt;
+&lt;/br&gt;
+.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? &lt;/br&gt; Yes.]]
+
+???
+Since the derivative (marginal effect) generally depends on the values of the covariates
 
 *What values should we use to get the marginal effect then?*
 
 AME uses **the actual values** and then averages across all individuals
 
---
+---
+# Average Marginal Effects
 
-### Some Benefits:
+.large[*intuitive* -- they are in the original metric of the dependent variable]
 
-1. *intuitive* -- they are in the original metric of the dependent variable
-1. *interpretable* -- they refer to the change in the dependent variable for a one unit change in the independent
-1. *meaningful confidence intervals* -- using bootstrapping (used here) or the delta method
+.large[*interpretable* -- they refer to the change in the dependent variable for a one unit change in the independent]
+
+.large[*meaningful confidence intervals* -- using bootstrapping (used here) or the delta method]
 
 --
 
 .center[
-*These qualities are lacking in mediation analysis.* &lt;/br&gt;&lt;/br&gt;
-So... (Punchline) &lt;/br&gt;**Let's use Average Marginal Effects with mediation analysis**
+.large[*Again, these qualities are lacking in mediation analysis.*] &lt;/br&gt;&lt;/br&gt;&lt;/br&gt;
+So... (Punchline) &lt;/br&gt;&lt;/br&gt;
+.large[**Let's use Average Marginal Effects with mediation analysis**]
 ]
 
 ---
@@ -269,16 +281,14 @@ class: inverse, center, middle
 # Marginal Mediation 
 
 ---
-# The What
+# Marginal Mediation 
 
-It is two step approach
+.mlarge[It is three step approach]
 
 1. Estimate the mediation model (via OLS or GLM)
 1. Compute the average marginal effects of each path
+1. Estimate each effect (each path is additive)
 
---
-
-Since each path is the additive change, the combination of paths is much more straightforward
 
 --
 
@@ -302,22 +312,33 @@ Since this method can handle all sorts of combinations of variable types, here a
 ---
 # Assumptions
 
-The same assumptions as linear models or generalized linear models hold.
+.left-column[
+### The same assumptions as linear models or generalized linear models hold.
 
-1. Correct distribution (normal in linear models)
-1. Proper variance (homoskedastic in linear models)
-1. Linear in parameters
-1. Random sample
-1. No measurement error
-1. No omitted influences
+&lt;/br&gt;&lt;/br&gt;
+.large[#### Only additional assumption with AME:]
+]
 
 --
 
+.right-column[
+1. Correct distribution (normal in linear models)
+
+1. Proper variance (homoskedastic in linear models)
+
+1. Linear in parameters
+
+1. Random sample
+
+1. No measurement error
+
+1. No omitted influences
+
 &lt;/br&gt;
 
-.center[&lt;b&gt;Only additional assumption with AME:&lt;/b&gt;]
+.large[#### Marginal effect can be described *additively* (after accounting for all the covariates)]
+]
 
-.center[Marginal effect can be described *additively* (after accounting for all the covariates)]
 
 ---
 class: inverse, center, middle

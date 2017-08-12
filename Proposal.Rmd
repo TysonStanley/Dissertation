@@ -61,20 +61,16 @@ class: inverse
 # Reproducibility
 
 .pull-left[
-Pychological Science (and Science in general) is undergoing a "reproducibility crisis"
+**"Reproducibility Crisis"**
 
 Many recommendations to improve.
 
 The most adopted suggestion by the APA:
 
-- No reliance on Null Hypothesis Significance Testing (NHST;  Cumming, 2014)
+- No reliance on Null Hypothesis Significance Testing (Cumming, 2014)
 - In its place, use *Effect Sizes* and *Confidence Intervals*
 
-.footnote[
-Cumming, G. (2014). The New Statistics: Why and How. *Psych. Science*.
 ]
-]
-
 
 .pull-right[
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=6, fig.width=7}
@@ -100,6 +96,7 @@ ggplot(eci, aes(factor(x, labels = paste("Variable", 1:5)), y)) +
   anteo::theme_anteo_wh()
 ```
 ]
+
 
 ---
 # Reproducibility and Mediation Analysis
@@ -203,6 +200,59 @@ When the mediator and/or outcome is categorical/non-normal, mediation analysis d
 ???
 How do we combine logistic and OLS coefficients?
 
+Adjusting to Odds Ratios doesn't help (it creates a multiplicitive effect instead of additive)
+
+Ultimately, to combine the paths, we need to be able to say the change for a one unit change in the predictor.
+
+---
+# Why the big fuss?
+
+.pull-left[
+#### Linear Model
+
+$$
+Y = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+The marginal effect of, say, $X_1$ is:
+$$
+\frac{\delta Y}{\delta X_1} = \beta_1
+$$
+]
+
+--
+
+.pull-right[
+
+#### Logistic Regression
+
+$$
+logit(Y) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+$$
+log(\frac{Prob(Y = 1)}{1 - Prob(Y = 1)}) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+$$
+\frac{Prob(Y = 1)}{1 - Prob(Y = 1)} = e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}
+$$
+
+$$
+Prob(Y = 1) = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}
+$$
+
+The marginal effect of, say, $X_1$ is:
+$$
+\frac{\delta Y}{\delta X_1} = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{(1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i})^2}
+$$
+]
+
+???
+The derivative (marginal effect) generally depends on the values of the covariates
+
+To simply combine effects, like in linear regression, we need the estimate to be **additive**
+
+
 ---
 # Current Approaches
 
@@ -261,100 +311,62 @@ data.frame(
 
 --
 
-#### Still missing: *intuitive, interpretable effect size measures with meaningful confidence intervals*
+</br>
+.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? </br> No.]]
 
 ---
 # Average Marginal Effects
 
-The *average* of the marginal effects (it is a post-estimation approach; Bartus, 2005):
+The *average* of the marginal effects -- it is a post-estimation approach (Bartus, 2005):
 
 --
 
+.pull-left[
 #### Definition: Continuous Variable
 $$
 AME_k = \beta_k \frac{1}{n} \sum_i^n f(\beta x_i)
 $$
-where $f$ is the derivative of the estimate with respect to $x_i$, the $\beta x_i$ refers to the linear combination of the predictors, and $AME_k$ is the average marginal effect for the $kth$ variable. 
-
---
-
-#### Definition: Dummy Coded Variable
-$$
-AME_{k} = \frac{1}{n} \sum_i^n [ F(\beta x_i | x_i = 1) - F(\beta x_i | x_i = 0) ]
-$$
-where $F(\beta x_i | x_i = 1)$ is the predicted value of the $ith$ observation when the dummy variable equals one and $F(\beta x_i | x_i = 0)$ is the predicted value when the dummy value equals zero. 
-
----
-# Why the big fuss?
-
-.pull-left[
-
-#### Linear Model
-
-$$
-Y = \beta_0 + \sum_j^p \beta_j X_j + e_i
-$$
-
-The marginal effect of, say, $X_1$ is:
-$$
-\frac{\delta Y}{\delta X_1} = \beta_1
-$$
+where $f$ is the derivative of the estimate with respect to $x_i$, the $\beta x_i$ is the linear combination of the predictors, and $AME_k$ is the average marginal effect for the $kth$ variable. 
 ]
 
 --
 
 .pull-right[
-
-#### Logistic Regression
-
+#### Definition: Dummy Coded Variable
 $$
-logit(Y) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+AME_{k} = \frac{1}{n} \sum_i^n [ F(\beta x_i | x_i = 1) - F(\beta x_i | x_i = 0) ]
 $$
-$$
-log(\frac{Prob(Y = 1)}{1 - Prob(Y = 1)}) = \beta_0 + \sum_j^p \beta_j X_j + e_i
-$$
-
-$$
-\frac{Prob(Y = 1)}{1 - Prob(Y = 1)} = e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}
-$$
-
-$$
-Prob(Y = 1) = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}
-$$
-
-The marginal effect of, say, $X_1$ is:
-$$
-\frac{\delta Y}{\delta X_1} = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{(1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i})^2}
-$$
+where $F(\beta x_i | x_i = 1)$ is the predicted value of the $ith$ observation when the dummy variable equals one and $F(\beta x_i | x_i = 0)$ is the predicted value when the dummy value equals zero. 
 ]
 
-???
-The derivative (marginal effect) generally depends on the values of the covariates
-
----
-# Average Marginal Effects
-
-The derivative (marginal effect) generally depends on the values of the covariates
-
 --
+
+</br>
+</br>
+.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? </br> Yes.]]
+
+???
+Since the derivative (marginal effect) generally depends on the values of the covariates
 
 *What values should we use to get the marginal effect then?*
 
 AME uses **the actual values** and then averages across all individuals
 
---
+---
+# Average Marginal Effects
 
-### Some Benefits:
+.large[*intuitive* -- they are in the original metric of the dependent variable]
 
-1. *intuitive* -- they are in the original metric of the dependent variable
-1. *interpretable* -- they refer to the change in the dependent variable for a one unit change in the independent
-1. *meaningful confidence intervals* -- using bootstrapping (used here) or the delta method
+.large[*interpretable* -- they refer to the change in the dependent variable for a one unit change in the independent]
+
+.large[*meaningful confidence intervals* -- using bootstrapping (used here) or the delta method]
 
 --
 
 .center[
-*These qualities are lacking in mediation analysis.* </br></br>
-So... (Punchline) </br>**Let's use Average Marginal Effects with mediation analysis**
+.large[*Again, these qualities are lacking in mediation analysis.*] </br></br></br>
+So... (Punchline) </br></br>
+.large[**Let's use Average Marginal Effects with mediation analysis**]
 ]
 
 ---
@@ -362,16 +374,14 @@ class: inverse, center, middle
 # Marginal Mediation 
 
 ---
-# The What
+# Marginal Mediation 
 
-It is two step approach
+.mlarge[It is three step approach]
 
 1. Estimate the mediation model (via OLS or GLM)
 1. Compute the average marginal effects of each path
+1. Estimate each effect (each path is additive)
 
---
-
-Since each path is the additive change, the combination of paths is much more straightforward
 
 --
 
@@ -395,22 +405,33 @@ Since this method can handle all sorts of combinations of variable types, here a
 ---
 # Assumptions
 
-The same assumptions as linear models or generalized linear models hold.
+.left-column[
+### The same assumptions as linear models or generalized linear models hold.
 
-1. Correct distribution (normal in linear models)
-1. Proper variance (homoskedastic in linear models)
-1. Linear in parameters
-1. Random sample
-1. No measurement error
-1. No omitted influences
+</br></br>
+.large[#### Only additional assumption with AME:]
+]
 
 --
 
+.right-column[
+1. Correct distribution (normal in linear models)
+
+1. Proper variance (homoskedastic in linear models)
+
+1. Linear in parameters
+
+1. Random sample
+
+1. No measurement error
+
+1. No omitted influences
+
 </br>
 
-.center[<b>Only additional assumption with AME:</b>]
+.large[#### Marginal effect can be described *additively* (after accounting for all the covariates)]
+]
 
-.center[Marginal effect can be described *additively* (after accounting for all the covariates)]
 
 ---
 class: inverse, center, middle
