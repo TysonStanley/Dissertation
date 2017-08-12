@@ -17,6 +17,7 @@ output:
 options(htmltools.dir.version = FALSE)
 ```
 class: inverse
+count: false
 
 # Outline
 
@@ -63,13 +64,16 @@ class: inverse
 .pull-left[
 **"Reproducibility Crisis"**
 
-Many recommendations to improve.
+Many recommendations to improve
 
 The most adopted suggestion by the APA:
 
 - No reliance on Null Hypothesis Significance Testing (Cumming, 2014)
-- In its place, use *Effect Sizes* and *Confidence Intervals*
+- In its place, use **Effect Sizes** and **Confidence Intervals**
 
+But note: 
+
+*"Without an interpretable scale, it is difficult to use effect size to communicate results in a meaningful and useful way."* — Preacher and Hayes, 2011
 ]
 
 .pull-right[
@@ -97,29 +101,28 @@ ggplot(eci, aes(factor(x, labels = paste("Variable", 1:5)), y)) +
 ```
 ]
 
-
 ---
 # Reproducibility and Mediation Analysis
 
-.mlarge[The APA, in general, recommends using **effect sizes and confidence intervals**]
+.mlarge[How does the APA's recommendation---**effect sizes and confidence intervals**---affect Prevention Science?]
 
 --
 
 *Mediation Analysis*:
-- Lacks intuitive and interpretable effect sizes in many situations (e.g., when mediator/outcome is nominal, ordinal, count, or binary)
+- Lacks intuitive and interpretable effect sizes in many situations
 --
 
 - *Limits its utility and raises questions about best practices*
 
+--
+
 ![](fig_mediation_questions.jpg)
 
 ---
-# Mediation Analysis
+# What is Mediation Analysis? Why is it important?
 
 .pull-left[
-A series of regressions (path analysis)
-
-Simplest situation shown below (equations) and at right (figure):
+A series of regressions (path analysis):
 
 $$
 Y = c_0 + b_1 M + c'_1 X + e_1
@@ -129,9 +132,11 @@ $$
 M = a_0 + a_1 X + e_2
 $$
 
-Used extensively in prevention science research
+Used extensively in Prevention Science research
 
-Info on *individual paths* and *entire process*
+- Info on *how* a variable affects another
+- Info on *individual paths* and *entire process*
+- Info on *actionable targets of intervention*
 
 ]
 
@@ -179,13 +184,14 @@ data.frame(
   Definitions = c("a * b", "c'", "a * b + c'")
 ) %>%
   DT::datatable(options = list(dom = "t"),
-                rownames = FALSE)
+                rownames = FALSE,
+                colnames = c("Effects of Interest", "Definitions"))
 ```
 
 ---
 # But...
 
-When the mediator and/or outcome is categorical/non-normal, mediation analysis does not have:
+When the mediator and/or outcome is **categorical/non-normal**, mediation analysis does not have:
 
 - intuitive interpretation
 - defined effect sizes (indirect or total)
@@ -200,9 +206,11 @@ When the mediator and/or outcome is categorical/non-normal, mediation analysis d
 ???
 How do we combine logistic and OLS coefficients?
 
-Adjusting to Odds Ratios doesn't help (it creates a multiplicitive effect instead of additive)
+Generally, we are looking at the **marginal effect** of a variable on another (it is additive)
 
-Ultimately, to combine the paths, we need to be able to say the change for a one unit change in the predictor.
+To have any meaningful interpretation, need additive
+
+Adjusting to Odds Ratios doesn't help (it creates a multiplicitive effect instead of additive)
 
 ---
 # Why the big fuss?
@@ -252,9 +260,57 @@ The derivative (marginal effect) generally depends on the values of the covariat
 
 To simply combine effects, like in linear regression, we need the estimate to be **additive**
 
+---
+# Why the big fuss?  --> Marginal Effect depends on all covariates
+
+.pull-left[
+#### Linear Model
+
+$$
+Y = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+The marginal effect of, say, $X_1$ is:
+$$
+\frac{\delta Y}{\delta X_1} = \beta_1
+$$
+]
+
+.pull-right[
+
+#### Logistic Regression
+
+$$
+logit(Y) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+$$
+log(\frac{Prob(Y = 1)}{1 - Prob(Y = 1)}) = \beta_0 + \sum_j^p \beta_j X_j + e_i
+$$
+
+$$
+\frac{Prob(Y = 1)}{1 - Prob(Y = 1)} = e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}
+$$
+
+$$
+Prob(Y = 1) = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}
+$$
+
+The marginal effect of, say, $X_1$ is:
+$$
+\frac{\delta Y}{\delta X_1} = \frac{e^{\beta_0 + \sum_j^p \beta_j X_j + e_i}}{(1 + e^{\beta_0 + \sum_j^p \beta_j X_j + e_i})^2}
+$$
+]
+
+???
+The derivative (marginal effect) generally depends on the values of the covariates
+
+To simply combine effects, like in linear regression, we need the estimate to be **additive**
+
 
 ---
 # Current Approaches
+
+For mediation analysis to work with **categorical/non-normal**
 
 ```{r, echo=FALSE}
 data.frame(
@@ -284,6 +340,8 @@ data.frame(
 count: false
 
 # Current Approaches
+
+For mediation analysis to work with **categorical/non-normal**
 
 ```{r, echo=FALSE}
 data.frame(
@@ -371,23 +429,19 @@ So... (Punchline) </br></br>
 
 ---
 class: inverse, center, middle
+count: false
 # Marginal Mediation 
 
 ---
+background-image: url(fig_threestep.jpg)
+background-position: 80% 85%
+background-size: 800px
+
 # Marginal Mediation 
 
-.mlarge[It is three step approach]
-
-1. Estimate the mediation model (via OLS or GLM)
-1. Compute the average marginal effects of each path
-1. Estimate each effect (each path is additive)
-
-
---
-
-#### Example with Binary Mediator and Count Outcome
-
-![](fig_combining.jpg)
+.left-column[
+## Three Step Approach
+]
 
 ---
 # Interpretation
@@ -403,13 +457,21 @@ Since this method can handle all sorts of combinations of variable types, here a
 ### Principle 3: Both the direct and total effects are interpreted based on the outcome's original metric.
 
 ---
+# Interpretation
+
+#### Example with Binary Mediator and Count Outcome
+
+![](fig_combining.jpg)
+
+
+---
 # Assumptions
 
 .left-column[
 ### The same assumptions as linear models or generalized linear models hold.
 
 </br></br>
-.large[#### Only additional assumption with AME:]
+.coral[### Only additional assumption with AME:]
 ]
 
 --
@@ -427,17 +489,20 @@ Since this method can handle all sorts of combinations of variable types, here a
 
 1. No omitted influences
 
-</br>
+</br></br>
 
-.large[#### Marginal effect can be described *additively* (after accounting for all the covariates)]
+### Marginal effect can be described *additively* (after accounting for all the covariates)
 ]
 
 
 ---
 class: inverse, center, middle
+count: false
 # Proposed Methods
 
 ---
+# Proposed Methods
+
 ## 1. Development
 
 - to develop the approach and the software
@@ -457,21 +522,21 @@ class: inverse, center, middle
 ---
 # Method Development
 
-.large[#### Mediation as built on OLS and GLM]
+.large[Mediation as built on OLS and GLM]
 
 ---
 count: false
 
 # Method Development
 
-.large[#### Mediation as built on OLS and GLM **+ Average Marginal Effects**]
+.large[Mediation as built on OLS and GLM **+ Average Marginal Effects**]
 
 --
 
 </br>
-Two considerations for each type of mediator/outcome variable (multinomial, count, ordinal, dichotomous): 
+Two *considerations* for each type of mediator/outcome variable (multinomial, count, ordinal, dichotomous): 
 
-1. Need a way to integrate moderation (interaction effects) into the framework. 
+1. Need a way to integrate *moderation* (interaction effects) into the framework. 
     - Interactions with marginal effects are more complex.
 1. Generally, 
 $$
@@ -499,10 +564,14 @@ count: false
 ## Notes
 ]
 .right-column[
-Functions to assess model's fit and visualize model, will apply the best practices for both speed and user readability (Wickham, 2015), and will include built-in tests for Linux, Mac, and Windows platforms
+1. Functions to assess model's fit and visualize model,
+1. Will apply the best practices for both speed and user readability (Wickham, 2015), and
+1. Will include built-in tests for Linux, Mac, and Windows platforms
+
+Most important functions will be developed first so the next phase of the project can continue
 ]
 
-
+.footnote[Future plans: apply benefits of other mediation modeling packages]
 
 ---
 # Monte Carlo Simulation
@@ -522,9 +591,13 @@ The observed variable, $M_i$, is defined as follows: $M_i = 0$ if $Prob(M = 1) <
 $$
 Y_i = b_0 + b_1 M_i + c'_1 x_c + c'_2 x_d + e_i
 $$
+where this $e_i$ also is normally distributed with $M = 0$ and $SD = 1$.
+
+- $x_c$ is a continuous predictor
+- $x_d$ is a dummy coded predictor
 
 ---
-# Monte Carlo Simulation
+# Monte Carlo Simulation: Conditions
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 tab = read.csv("~/Dropbox/1 Dissertation/Manuscript/Data/ConditionsTable.csv")
@@ -574,6 +647,21 @@ background-size: contain
 background-repeat: no-repeat
 
 ---
+# Conclusions
+
+.large[Ultimately, this project will produce:
+
+1. A new approach to mediation analysis that applies across a wide variety of situations
+
+1. Guidelines for using the approach in finite samples
+
+1. An example of the approach on prevention data
+
+1. More evidence about the link between chronic physical conditions and poor behavioral outcomes
+]
+
+---
+count: false
 class: inverse, center, middle
 
 # Thank you.
