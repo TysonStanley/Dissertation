@@ -258,25 +258,20 @@ To simply combine effects, like in linear regression, we need the estimate to be
 ---
 # Current Approaches
 
-For mediation analysis to work with **categorical/non-normal**
-
 <div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'white' : value == 'Ignore' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
-
+<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'white' : value == '4' ? 'white' : value == '5' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 ---
 count: false
 
 # Current Approaches
 
-For mediation analysis to work with **categorical/non-normal**
-
 <div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[["Simple","SEM","Standardize","Ignore"],["Interpret each path separately","Use SEM's approach (probit threshold function)","Standardize the coefficients","Pretend all variables are continuous"],["Easy","Powerful, Well-designed, Easy to Implement","Provides significance test of indirect effect","Easy"],["Ignores some information","Only works with ordinal variables","Assumptions (distributions), difficult to interpret beyond p-value","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Approach<\/th>\n      <th>What<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == 'Simple' ? 'black' : value == 'SEM' ? 'black' : value == 'Standardize' ? 'black' : value == 'Ignore' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'black' : value == '4' ? 'black' : value == '5' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
 --
 
 &lt;/br&gt;
-.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? &lt;/br&gt; No.]]
+.center[.mlarge[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? &lt;/br&gt; No.]]
 
 ---
 # Average Marginal Effects
@@ -568,7 +563,7 @@ class: inverse, center, middle
 # Thank you.
 
 .footnote[
-* All references cited herein can be found in the proposal manuscript.
+All references cited herein can be found in the proposal manuscript.
 ]
     </textarea>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>

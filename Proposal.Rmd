@@ -310,67 +310,76 @@ To simply combine effects, like in linear regression, we need the estimate to be
 ---
 # Current Approaches
 
-For mediation analysis to work with **categorical/non-normal**
-
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 data.frame(
-  Approach = c("Simple", "SEM", "Standardize", "Ignore"),
-  What = c("Interpret each path separately",
-           "Use SEM's approach (probit threshold function)",
-           "Standardize the coefficients",
-           "Pretend all variables are continuous"),
-  Pros = c("Easy", 
-           "Powerful, Well-designed, Easy to Implement", 
-           "Provides significance test of indirect effect",
-           "Easy"),
-  Cons = c("Ignores some information",
-           "Only works with ordinal variables",
+  Number = 1:5,
+  Approach = c("Series of logistic regressions",
+               "Use SEM's approach (polychoric correlation)",
+               "Standardize the coefficients",
+               "Interpret each path separately",
+               "Pretend all variables are continuous"),
+  Pros = c("Simple to apply in most software", 
+           "Powerful, well-designed,\nEasy to implement with proper software", 
+           "Provides significance test\nof indirect effect",
+           "Simplest approach with proper models",
+           "Simplest approach"),
+  Cons = c("Ignores some information,\n cannot obtain indirect effect size",
+           "Only works with ordinal variables,\n only standardized effect sizes",
            "Assumptions (distributions), difficult to interpret beyond p-value",
+           "Ignores some information,\n cannot obtain indirect effect size",
            "Purposeful mis-specification, poor model fit")
 ) %>%
   DT::datatable(options = list(dom = "t"),
                 rownames = FALSE) %>%
-  DT::formatStyle(c("Approach"),
+  DT::formatStyle(c("Number"),
                   target = "row",
-                  color = DT::styleEqual(c("Simple", "SEM", "Standardize", "Ignore"), 
-                                         c("black", "black", "white", "white")))
+                  color = DT::styleEqual(c("1", 
+                                           "2", 
+                                           "3", 
+                                           "4",
+                                           "5"), 
+                                         c("black", "black", "white", "white", "white")))
 ```
-
 ---
 count: false
 
 # Current Approaches
 
-For mediation analysis to work with **categorical/non-normal**
-
-```{r, echo=FALSE}
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 data.frame(
-  Approach = c("Simple", "SEM", "Standardize", "Ignore"),
-  What = c("Interpret each path separately",
-           "Use SEM's approach (probit threshold function)",
-           "Standardize the coefficients",
-           "Pretend all variables are continuous"),
-  Pros = c("Easy", 
-           "Powerful, Well-designed, Easy to Implement", 
-           "Provides significance test of indirect effect",
-           "Easy"),
-  Cons = c("Ignores some information",
-           "Only works with ordinal variables",
+  Number = 1:5,
+  Approach = c("Series of logistic regressions",
+               "Use SEM's approach (polychoric correlation)",
+               "Standardize the coefficients",
+               "Interpret each path separately",
+               "Pretend all variables are continuous"),
+  Pros = c("Simple to apply in most software", 
+           "Powerful, well-designed,\nEasy to implement with proper software", 
+           "Provides significance test\nof indirect effect",
+           "Simplest approach with proper models",
+           "Simplest approach"),
+  Cons = c("Ignores some information,\n cannot obtain indirect effect size",
+           "Only works with ordinal variables,\n only standardized effect sizes",
            "Assumptions (distributions), difficult to interpret beyond p-value",
+           "Ignores some information,\n cannot obtain indirect effect size",
            "Purposeful mis-specification, poor model fit")
 ) %>%
   DT::datatable(options = list(dom = "t"),
                 rownames = FALSE) %>%
-  DT::formatStyle(c("Approach"),
+  DT::formatStyle(c("Number"),
                   target = "row",
-                  color = DT::styleEqual(c("Simple", "SEM", "Standardize", "Ignore"), 
-                                         c("black", "black", "black", "black")))
+                  color = DT::styleEqual(c("1", 
+                                           "2", 
+                                           "3", 
+                                           "4",
+                                           "5"), 
+                                         c("black", "black", "black", "black", "black")))
 ```
 
 --
 
 </br>
-.center[.large[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? </br> No.]]
+.center[.mlarge[*Intuitive, interpretable effect size measures with meaningful confidence intervals*? </br> No.]]
 
 ---
 # Average Marginal Effects
@@ -667,6 +676,6 @@ class: inverse, center, middle
 # Thank you.
 
 .footnote[
-* All references cited herein can be found in the proposal manuscript.
+All references cited herein can be found in the proposal manuscript.
 ]
 
