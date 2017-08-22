@@ -41,43 +41,32 @@ count: false
 # Reproducibility
 
 .large[
-#### Three Types:
-
 1. **Methods**: replicate results with *same methods and data*
 
 1. **Results**: replicate results with same methods and *independent data*
-
-1. **Inference**: replicate *inference* with same methods and same or independent data
 ]
 
 --
 
-
-.center[
 </br></br>
-.large[Here, we will be mainly discussing *results* reproducibility.]
-]
+.center[.large[**A Reproducibility Crisis**]]
 
----
-# Reproducibility
+--
 
-.pull-left[
-**"Reproducibility Crisis"**
-
-Many recommendations to improve
-
-The most adopted suggestion by the APA:
+The most adopted suggestion to improve by the APA:
 
 - No reliance on Null Hypothesis Significance Testing (Cumming, 2014)
+
 - In its place, use **Effect Sizes** and **Confidence Intervals**
 
-But note: 
-
-*"Without an interpretable scale, it is difficult to use effect size to communicate results in a meaningful and useful way."* — Preacher and Hayes, 2011
+--
+</br></br>
+.center[.large[
+Note: *"Without an interpretable scale, it is difficult to use effect size to communicate results in a meaningful and useful way."* — Preacher and Hayes, 2011
+]
 ]
 
-.pull-right[
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=6, fig.width=7}
+```{r, eval=FALSE, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=6, fig.width=7}
 library(tidyverse)
 set.seed(84321)
 ## Quick Effect Size + Uncertainty Plot
@@ -99,7 +88,6 @@ ggplot(eci, aes(factor(x, labels = paste("Variable", 1:5)), y)) +
        y = "Effect Size") +
   anteo::theme_anteo_wh()
 ```
-]
 
 ---
 # Reproducibility and Mediation Analysis
@@ -261,6 +249,7 @@ The derivative (marginal effect) generally depends on the values of the covariat
 To simply combine effects, like in linear regression, we need the estimate to be **additive**
 
 ---
+count: false
 # Why the big fuss?  --> Marginal Effect depends on all covariates
 
 .pull-left[
@@ -384,7 +373,7 @@ data.frame(
 ---
 # Average Marginal Effects
 
-The *average* of the marginal effects -- it is a post-estimation approach (Bartus, 2005):
+The *average* of the marginal effects (Bartus, 2005):
 
 --
 

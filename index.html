@@ -49,44 +49,32 @@ count: false
 # Reproducibility
 
 .large[
-#### Three Types:
-
 1. **Methods**: replicate results with *same methods and data*
 
 1. **Results**: replicate results with same methods and *independent data*
-
-1. **Inference**: replicate *inference* with same methods and same or independent data
 ]
 
 --
 
-
-.center[
 &lt;/br&gt;&lt;/br&gt;
-.large[Here, we will be mainly discussing *results* reproducibility.]
-]
+.center[.large[**A Reproducibility Crisis**]]
 
----
-# Reproducibility
+--
 
-.pull-left[
-**"Reproducibility Crisis"**
-
-Many recommendations to improve
-
-The most adopted suggestion by the APA:
+The most adopted suggestion to improve by the APA:
 
 - No reliance on Null Hypothesis Significance Testing (Cumming, 2014)
+
 - In its place, use **Effect Sizes** and **Confidence Intervals**
 
-But note: 
-
-*"Without an interpretable scale, it is difficult to use effect size to communicate results in a meaningful and useful way."* — Preacher and Hayes, 2011
+--
+&lt;/br&gt;&lt;/br&gt;
+.center[.large[
+Note: *"Without an interpretable scale, it is difficult to use effect size to communicate results in a meaningful and useful way."* — Preacher and Hayes, 2011
+]
 ]
 
-.pull-right[
-&lt;img src="Proposal_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
-]
+
 
 ---
 # Reproducibility and Mediation Analysis
@@ -133,8 +121,8 @@ Used extensively in Prevention Science research
 
 --
 
-<div id="htmlwidget-294ed802bae5c62f3dd7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-294ed802bae5c62f3dd7">{"x":{"filter":"none","data":[["Indirect Effect","Direct Effect","Total Effect"],["a * b","c'","a * b + c'"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Effects of Interest<\/th>\n      <th>Definitions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-cf402ce7cc86271696da" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cf402ce7cc86271696da">{"x":{"filter":"none","data":[["Indirect Effect","Direct Effect","Total Effect"],["a * b","c'","a * b + c'"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Effects of Interest<\/th>\n      <th>Definitions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ---
 # But...
@@ -209,6 +197,7 @@ The derivative (marginal effect) generally depends on the values of the covariat
 To simply combine effects, like in linear regression, we need the estimate to be **additive**
 
 ---
+count: false
 # Why the big fuss?  --&gt; Marginal Effect depends on all covariates
 
 .pull-left[
@@ -258,15 +247,15 @@ To simply combine effects, like in linear regression, we need the estimate to be
 ---
 # Current Approaches
 
-<div id="htmlwidget-ef2aef99ebf5150f3d25" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-ef2aef99ebf5150f3d25">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'white' : value == '4' ? 'white' : value == '5' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-fb995c31e52fb3fc3abd" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-fb995c31e52fb3fc3abd">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'white' : value == '4' ? 'white' : value == '5' ? 'white' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 ---
 count: false
 
 # Current Approaches
 
-<div id="htmlwidget-b15db074a19a4d7b87f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b15db074a19a4d7b87f1">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'black' : value == '4' ? 'black' : value == '5' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
+<div id="htmlwidget-67ee1631e14ba645d867" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-67ee1631e14ba645d867">{"x":{"filter":"none","data":[[1,2,3,4,5],["Series of logistic regressions","Use SEM's approach (polychoric correlation)","Standardize the coefficients","Interpret each path separately","Pretend all variables are continuous"],["Simple to apply in most software","Powerful, well-designed,\nEasy to implement with proper software","Provides significance test\nof indirect effect","Simplest approach with proper models","Simplest approach"],["Ignores some information,\n cannot obtain indirect effect size","Only works with ordinal variables,\n only standardized effect sizes","Assumptions (distributions), difficult to interpret beyond p-value","Ignores some information,\n cannot obtain indirect effect size","Purposeful mis-specification, poor model fit"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Number<\/th>\n      <th>Approach<\/th>\n      <th>Pros<\/th>\n      <th>Cons<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","columnDefs":[{"className":"dt-right","targets":0}],"order":[],"autoWidth":false,"orderClasses":false,"rowCallback":"function(row, data) {\nvar value=data[0]; if (value!==null) $(row).css({'color':value == '1' ? 'black' : value == '2' ? 'black' : value == '3' ? 'black' : value == '4' ? 'black' : value == '5' ? 'black' : ''});\n}"}},"evals":["options.rowCallback"],"jsHooks":[]}</script>
 
 --
 
@@ -276,7 +265,7 @@ count: false
 ---
 # Average Marginal Effects
 
-The *average* of the marginal effects -- it is a post-estimation approach (Bartus, 2005):
+The *average* of the marginal effects (Bartus, 2005):
 
 --
 
@@ -500,8 +489,8 @@ where this `\(e_i\)` also is normally distributed with `\(M = 0\)` and `\(SD = 1
 ---
 # Monte Carlo Simulation: Conditions
 
-<div id="htmlwidget-b16e2f2d245dc177e6d8" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b16e2f2d245dc177e6d8">{"x":{"filter":"none","data":[["Sample Size ","Effect size of a path - (probability units)","Effect size of b path - standardized ","Effect size of c' path - standardized ","Proportion of Positive Response (Binary Mediators)","Number of Mediators in Model ","Distribution of the Probability","Bootstrap Size","","Total Conditions "],["200, 500 ",".05, .10, .20, .50",".10, .30, .50 ","0, .30 ",".05, .10, .50","1, 3","Logistic, Linear","500, 1000","","1,152"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Independent Variables<\/th>\n      <th>Conditions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-c6e7cc3e258a5432d337" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-c6e7cc3e258a5432d337">{"x":{"filter":"none","data":[["Sample Size ","Effect size of a path - (probability units)","Effect size of b path - standardized ","Effect size of c' path - standardized ","Proportion of Positive Response (Binary Mediators)","Number of Mediators in Model ","Distribution of the Probability","Bootstrap Size","","Total Conditions "],["200, 500 ",".05, .10, .20, .50",".10, .30, .50 ","0, .30 ",".05, .10, .50","1, 3","Logistic, Linear","500, 1000","","1,152"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>Independent Variables<\/th>\n      <th>Conditions<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"dom":"t","order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 --
 
