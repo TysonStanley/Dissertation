@@ -312,7 +312,7 @@ data.frame(
            "Provides significance test\nof indirect effect",
            "Simplest approach with proper models",
            "Simplest approach"),
-  Cons = c("Ignores some information,\n cannot obtain indirect effect size",
+  Cons = c("Cannot obtain indirect effect size, only works with binary (M & Y)",
            "Only works with ordinal variables,\n only standardized effect sizes",
            "Assumptions (distributions), difficult to interpret beyond p-value",
            "Ignores some information,\n cannot obtain indirect effect size",
@@ -347,7 +347,7 @@ data.frame(
            "Provides significance test\nof indirect effect",
            "Simplest approach with proper models",
            "Simplest approach"),
-  Cons = c("Ignores some information,\n cannot obtain indirect effect size",
+  Cons = c("Cannot obtain indirect effect size, only works with binary (M & Y)",
            "Only works with ordinal variables,\n only standardized effect sizes",
            "Assumptions (distributions), difficult to interpret beyond p-value",
            "Ignores some information,\n cannot obtain indirect effect size",
@@ -446,21 +446,55 @@ background-size: 800px
 
 Since this method can handle all sorts of combinations of variable types, here are some interpretation guidelines.
 
-### Principle 1: The individual paths are interpreted based on the corresponding endogenous variable's original metric.
+.pull-left[
+**Principle 1: The individual paths are interpreted based on the corresponding endogenous variable's original metric.**
+
+</br>
+
+**Principle 2: The indirect effect, as a combination of the a and b paths, are interpreted based on the outcome's original metric.**
+
+</br>
+
+**Principle 3: Both the direct and total effects are interpreted based on the outcome's original metric.**
+]
 
 --
-### Principle 2: The indirect effect, as a combination of the a and b paths, are interpreted based on the outcome's original metric.
 
---
-### Principle 3: Both the direct and total effects are interpreted based on the outcome's original metric.
+.pull-right[
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.align='center', fig.height=4, fig.width=6}
+library("lavaan")
 
----
-# Interpretation
+# Example 5.8 from mplus user guide:
+Data <- data.frame(
+  Y_count = rnorm(100),
+  X_continuous = rnorm(100),
+  M_binary = rnorm(100)
+)
 
-#### Example with Binary Mediator and Count Outcome
+# Model:
+model.Lavaan <- '
+  M_binary ~ X_continuous
+  Y_count ~ M_binary + X_continuous
+'
+fit <- cfa(model.Lavaan, data=Data, std.lv=TRUE)
 
-![](fig_combining.jpg)
-
+# Plot path diagram:
+library(semPlot)
+semPaths(fit,
+         title=FALSE, curvePivot = TRUE,
+         edgeLabels = c("AME = 0.23", "AME = 1.5", "AME = 0.5"),
+         edge.label.cex = 2,
+         nodeLabels = list(expression("M (binary)"), expression("Y (count)"), expression("X (continuous)")),
+         layout = "spring",
+         sizeMan = 14,
+         shapeMan = "rectangle",
+         border.color = "dodgerblue4",
+         border.width = 3,
+         node.width = 1.75,
+         node.height = 1,
+         mar = c(4,6,5,6))
+```
+]
 
 ---
 # Assumptions
@@ -610,7 +644,7 @@ tab[, 1:2] %>%
 Each condition will have 500 replications.
 
 ---
-# Application Studies
+# Application Study
 
 The National Longitudinal Study of Adolescent Health (“Add Health”; Harris, Halpern, Haberstick, & Smolen, 2013)
 
